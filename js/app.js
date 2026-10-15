@@ -1,8 +1,21 @@
 const xhr = new XMLHttpRequest();
+const err = document.getElementById("errAndLoad")
 
 document.getElementById("loadConsoles").addEventListener("click", () => {
     xhr.open("GET", "https://ozarktechwebdev.com/api/consoles.json")
     xhr.onreadystatechange = function () {
+        if (xhr.readyState === 2) {
+            console.log("Headers recieved")
+            err.textContent = "Headers recieved"
+        }
+        if (xhr.readyState === 3) {
+            console.log("Loading response...")
+            err.textContent = "Loading response..."
+        }
+        if (xhr.readyState === 4) {
+            console.log("Request complete")
+            err.textContent = ""
+        }
         if (xhr.readyState == 4 && xhr.status == 200) {
             const retro = xhr.responseText
             console.log(retro)
@@ -58,6 +71,8 @@ document.getElementById("loadConsoles").addEventListener("click", () => {
 
             const sum = document.getElementById("summary")
             sum.textContent = `8 consoles · Oldest: ${oldest.name} (${oldest.year}) · Newest: ${newest.name} (${newest.year})`
+        } else {
+            err.textContent = "404. SERVER FILE NOT FOUND."
         }
     }
     xhr.send()
