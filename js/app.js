@@ -44,7 +44,7 @@ document.getElementById("loadConsoles").addEventListener("click", () => {
                 const retroName = document.createElement("h2")
                 retroName.textContent = retroObj.consoles[i].name
                 const retroText = document.createElement("p")
-                retroText.textContent = retroObj.consoles[i].manufacturer, "•", retroObj.consoles[i].year
+                retroText.textContent = `${retroObj.consoles[i].manufacturer} • ${retroObj.consoles[i].year}`
 
                 container.appendChild(retroName)
                 container.appendChild(retroText)
@@ -70,7 +70,9 @@ document.getElementById("loadConsoles").addEventListener("click", () => {
             console.log("Newest Console:", newest.name, newest.year)
 
             const sum = document.getElementById("summary")
-            sum.textContent = `8 consoles · Oldest: ${oldest.name} (${oldest.year}) · Newest: ${newest.name} (${newest.year})`
+            const bold = document.createElement("b")
+            bold.textContent = `8 consoles · Oldest: ${oldest.name} (${oldest.year}) · Newest: ${newest.name} (${newest.year})`
+            sum.appendChild(bold)
         } else {
             err.textContent = "404. SERVER FILE NOT FOUND."
         }
