@@ -39,6 +39,25 @@ document.getElementById("loadConsoles").addEventListener("click", () => {
                 card.appendChild(container)
                 theDiv.appendChild(card)
             }
+
+            let oldest = retroObj.consoles[0]
+            let newest = retroObj.consoles[0]
+
+            for (let i = 1; i < retroObj.consoles.length; i++) {
+                const currentConsole = retroObj.consoles[i]
+                if (currentConsole.year < oldest.year) {
+                    oldest = currentConsole
+                }
+                if (currentConsole.year > newest.year) {
+                    newest = currentConsole
+                }
+            }
+
+            console.log("Oldest Console:", oldest.name, oldest.year)
+            console.log("Newest Console:", newest.name, newest.year)
+
+            const sum = document.getElementById("summary")
+            sum.textContent = `8 consoles · Oldest: ${oldest.name} (${oldest.year}) · Newest: ${newest.name} (${newest.year})`
         }
     }
     xhr.send()
